@@ -16,6 +16,11 @@ final class AirPlaneService: AirPlaneServiceProtocol {
     
     private let apiManager: NetworkManager
     
+    private lazy var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        return decoder
+    }()
+    
     init(apiManager: NetworkManager) {
         self.apiManager = apiManager
     }
@@ -30,7 +35,7 @@ final class AirPlaneService: AirPlaneServiceProtocol {
                         completion(.failure(.jsonDecoderError))
                         return
                     }
-                    completion(.success(.init(data: model.data)))
+                    completion(.success(.init(flights: model.flights)))
                 case 400...500:
                     completion(.failure(.noData))
                 default:

@@ -17,7 +17,7 @@ final class ListOfAirTravelVC: UIViewController {
         table.backgroundColor = .clear
         table.showsVerticalScrollIndicator = false
         table.separatorStyle = .none
-        table.registerCells(withModels: AirTravelCellVM.self)
+        table.registerCells(withModels: AirTravelCellVM.self, EmptyCellVM.self)
         return table
     }()
     
@@ -44,7 +44,7 @@ final class ListOfAirTravelVC: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .purple
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -53,7 +53,10 @@ final class ListOfAirTravelVC: UIViewController {
         view.addSubviewsWithoutAutoresizing(tableView)
         
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaInsets.top)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaInsets.bottom).offset(25)
         }
     }
 }
@@ -70,6 +73,5 @@ extension ListOfAirTravelVC: UITableViewDelegate, UITableViewDataSource {
         model.configureAny(cell)
         return cell
     }
-    
 }
 
