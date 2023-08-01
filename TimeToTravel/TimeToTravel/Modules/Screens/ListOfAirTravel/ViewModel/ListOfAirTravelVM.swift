@@ -29,17 +29,25 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     
     func getData(_ completion: @escaping () -> Void) {
         
-        let ticketModel = AirTravelCellVM(
-            model: .init(
-                likeState: false,
-                startDate: "1 августа",
-                startCity: "Санкт-Петербург",
-                endDate: "2 августа",
-                endCity: "Москва",
-                price: "42600₽")
-        )
+        let emptyModel = EmptyCellVM(.init(height: 15))
         
-        cellModels.append(ticketModel)
+        getCheap { [weak self] models in
+            models.flights.forEach {
+                let ticketModel = AirTravelCellVM(
+                    model: .init(
+                        likeState: false,
+                        startDate: $0.startDate,
+                        startCity: $0.startCity,
+                        endDate: $0.endDate,
+                        endCity: $0.endCity,
+                        price: $0.price
+                    )
+                )
+                self?.cellModels.append(ticketModel)
+                self?.cellModels.append(emptyModel)
+            }
+            completion()
+        }
     }
     
     func cellData(for indexPath: IndexPath) -> AnyTableViewCellModelProtocol {
@@ -50,7 +58,7 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
         service.getCheap { [weak self] result in
             switch result {
             case .success(let model):
-                completion(.init(data: model.data))
+                completion(.init(flights: model.flights))
             case .failure(let error):
                 self?.showAlert(
                     title: "Что-то пошло не так",

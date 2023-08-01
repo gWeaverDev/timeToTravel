@@ -34,6 +34,9 @@
 		C12E5EDE2A792590003FF8FF /* ListOfAirTravelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */; };
 		C12E5EE02A7928EF003FF8FF /* AirTravelCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */; };
 		C1A94E052A792FE800AAC9C9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1A94E042A792FE800AAC9C9 /* SnapKit */; };
+		C1A94E082A7943F000AAC9C9 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A94E072A7943F000AAC9C9 /* String+Date.swift */; };
+		C1A94E0A2A795DA300AAC9C9 /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A94E092A795DA300AAC9C9 /* EmptyCell.swift */; };
+		C1A94E0C2A795DD100AAC9C9 /* EmptyCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A94E0B2A795DD100AAC9C9 /* EmptyCellVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		C12E5ED82A791B6F003FF8FF /* AirTravelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirTravelCell.swift; path = ../../../../../../../../../Desktop/AirTravelCell.swift; sourceTree = "<group>"; };
 		C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAirTravelVM.swift; sourceTree = "<group>"; };
 		C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTravelCellVM.swift; sourceTree = "<group>"; };
+		C1A94E072A7943F000AAC9C9 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		C1A94E092A795DA300AAC9C9 /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		C1A94E0B2A795DD100AAC9C9 /* EmptyCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 		C12E5E9F2A78F9B9003FF8FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C1A94E072A7943F000AAC9C9 /* String+Date.swift */,
 				C12E5EB02A78FC80003FF8FF /* UITableView */,
 				C12E5EAB2A78FBE7003FF8FF /* UIView */,
 			);
@@ -275,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				C12E5ED82A791B6F003FF8FF /* AirTravelCell.swift */,
+				C1A94E092A795DA300AAC9C9 /* EmptyCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 			children = (
 				C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */,
 				C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */,
+				C1A94E0B2A795DD100AAC9C9 /* EmptyCellVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -378,12 +387,15 @@
 				C12E5ECF2A7915FA003FF8FF /* NetworkServiceErrors.swift in Sources */,
 				C12E5EC32A790593003FF8FF /* AirPlaneService.swift in Sources */,
 				C12E5EB22A78FCAE003FF8FF /* UITableView+Register.swift in Sources */,
+				C1A94E082A7943F000AAC9C9 /* String+Date.swift in Sources */,
 				C12E5EA82A78FB8C003FF8FF /* TableViewCellModelProtocol.swift in Sources */,
+				C1A94E0A2A795DA300AAC9C9 /* EmptyCell.swift in Sources */,
 				C12E5E832A78F834003FF8FF /* AppDelegate.swift in Sources */,
 				C12E5E852A78F834003FF8FF /* SceneDelegate.swift in Sources */,
 				C12E5EE02A7928EF003FF8FF /* AirTravelCellVM.swift in Sources */,
 				C12E5EBF2A790582003FF8FF /* AirPlaneTarget.swift in Sources */,
 				C12E5ED92A791B6F003FF8FF /* AirTravelCell.swift in Sources */,
+				C1A94E0C2A795DD100AAC9C9 /* EmptyCellVM.swift in Sources */,
 				C12E5EC72A7910E3003FF8FF /* NetworkManager.swift in Sources */,
 				C12E5EAA2A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift in Sources */,
 				C12E5EC92A79112A003FF8FF /* MultiMoyaProvider.swift in Sources */,
