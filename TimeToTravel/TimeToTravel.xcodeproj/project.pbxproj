@@ -21,6 +21,7 @@
 		C12E5EB22A78FCAE003FF8FF /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB12A78FCAE003FF8FF /* UITableView+Register.swift */; };
 		C12E5EB42A78FD28003FF8FF /* UITableView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */; };
 		C12E5EB62A78FD5D003FF8FF /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */; };
+		C12E5EB92A790393003FF8FF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = C12E5EB82A790393003FF8FF /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C12E5EB92A790393003FF8FF /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +229,9 @@
 			dependencies = (
 			);
 			name = TimeToTravel;
+			packageProductDependencies = (
+				C12E5EB82A790393003FF8FF /* Moya */,
+			);
 			productName = TimeToTravel;
 			productReference = C12E5E7F2A78F834003FF8FF /* TimeToTravel.app */;
 			productType = "com.apple.product-type.application";
@@ -255,6 +260,9 @@
 				Base,
 			);
 			mainGroup = C12E5E762A78F834003FF8FF;
+			packageReferences = (
+				C12E5EB72A790392003FF8FF /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = C12E5E802A78F834003FF8FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -512,6 +520,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C12E5EB72A790392003FF8FF /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C12E5EB82A790393003FF8FF /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C12E5EB72A790392003FF8FF /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C12E5E772A78F834003FF8FF /* Project object */;
 }
