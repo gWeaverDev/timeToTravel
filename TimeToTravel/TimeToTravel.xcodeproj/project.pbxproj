@@ -30,6 +30,10 @@
 		C12E5ECD2A7912C2003FF8FF /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ECC2A7912C2003FF8FF /* ReachabilityManager.swift */; };
 		C12E5ECF2A7915FA003FF8FF /* NetworkServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ECE2A7915F9003FF8FF /* NetworkServiceErrors.swift */; };
 		C12E5ED12A79172B003FF8FF /* TicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ED02A79172B003FF8FF /* TicketResponseModel.swift */; };
+		C12E5ED92A791B6F003FF8FF /* AirTravelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ED82A791B6F003FF8FF /* AirTravelCell.swift */; };
+		C12E5EDE2A792590003FF8FF /* ListOfAirTravelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */; };
+		C12E5EE02A7928EF003FF8FF /* AirTravelCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */; };
+		C1A94E052A792FE800AAC9C9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1A94E042A792FE800AAC9C9 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,9 @@
 		C12E5ECC2A7912C2003FF8FF /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReachabilityManager.swift; path = ../../../../../../../Desktop/ReachabilityManager.swift; sourceTree = "<group>"; };
 		C12E5ECE2A7915F9003FF8FF /* NetworkServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkServiceErrors.swift; path = ../../../../../../../Desktop/NetworkServiceErrors.swift; sourceTree = "<group>"; };
 		C12E5ED02A79172B003FF8FF /* TicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TicketResponseModel.swift; path = ../../../../../../../../Desktop/TicketResponseModel.swift; sourceTree = "<group>"; };
+		C12E5ED82A791B6F003FF8FF /* AirTravelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirTravelCell.swift; path = ../../../../../../../../../Desktop/AirTravelCell.swift; sourceTree = "<group>"; };
+		C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAirTravelVM.swift; sourceTree = "<group>"; };
+		C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTravelCellVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C12E5EB92A790393003FF8FF /* Moya in Frameworks */,
+				C1A94E052A792FE800AAC9C9 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +125,7 @@
 		C12E5E982A78F938003FF8FF /* ListOfAirTravel */ = {
 			isa = PBXGroup;
 			children = (
-				C12E5E9B2A78F982003FF8FF /* ViewModel */,
+				C12E5EDC2A792579003FF8FF /* ViewModel */,
 				C12E5E9A2A78F961003FF8FF /* View */,
 			);
 			path = ListOfAirTravel;
@@ -135,16 +143,10 @@
 		C12E5E9A2A78F961003FF8FF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C12E5ED72A791B5C003FF8FF /* Cells */,
 				C12E5E862A78F834003FF8FF /* ListOfAirTravelVC.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		C12E5E9B2A78F982003FF8FF /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C12E5E9C2A78F98E003FF8FF /* ViewModel */ = {
@@ -269,6 +271,23 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		C12E5ED72A791B5C003FF8FF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5ED82A791B6F003FF8FF /* AirTravelCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C12E5EDC2A792579003FF8FF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */,
+				C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -287,6 +306,7 @@
 			name = TimeToTravel;
 			packageProductDependencies = (
 				C12E5EB82A790393003FF8FF /* Moya */,
+				C1A94E042A792FE800AAC9C9 /* SnapKit */,
 			);
 			productName = TimeToTravel;
 			productReference = C12E5E7F2A78F834003FF8FF /* TimeToTravel.app */;
@@ -318,6 +338,7 @@
 			mainGroup = C12E5E762A78F834003FF8FF;
 			packageReferences = (
 				C12E5EB72A790392003FF8FF /* XCRemoteSwiftPackageReference "Moya" */,
+				C1A94E032A792FE800AAC9C9 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = C12E5E802A78F834003FF8FF /* Products */;
 			projectDirPath = "";
@@ -347,6 +368,7 @@
 			files = (
 				C12E5EB42A78FD28003FF8FF /* UITableView+ViewModel.swift in Sources */,
 				C12E5EAD2A78FBF3003FF8FF /* UIView+Layout.swift in Sources */,
+				C12E5EDE2A792590003FF8FF /* ListOfAirTravelVM.swift in Sources */,
 				C12E5EAF2A78FC61003FF8FF /* UIView+Reusable.swift in Sources */,
 				C12E5E872A78F834003FF8FF /* ListOfAirTravelVC.swift in Sources */,
 				C12E5ECD2A7912C2003FF8FF /* ReachabilityManager.swift in Sources */,
@@ -359,7 +381,9 @@
 				C12E5EA82A78FB8C003FF8FF /* TableViewCellModelProtocol.swift in Sources */,
 				C12E5E832A78F834003FF8FF /* AppDelegate.swift in Sources */,
 				C12E5E852A78F834003FF8FF /* SceneDelegate.swift in Sources */,
+				C12E5EE02A7928EF003FF8FF /* AirTravelCellVM.swift in Sources */,
 				C12E5EBF2A790582003FF8FF /* AirPlaneTarget.swift in Sources */,
+				C12E5ED92A791B6F003FF8FF /* AirTravelCell.swift in Sources */,
 				C12E5EC72A7910E3003FF8FF /* NetworkManager.swift in Sources */,
 				C12E5EAA2A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift in Sources */,
 				C12E5EC92A79112A003FF8FF /* MultiMoyaProvider.swift in Sources */,
@@ -594,6 +618,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		C1A94E032A792FE800AAC9C9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -601,6 +633,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C12E5EB72A790392003FF8FF /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		C1A94E042A792FE800AAC9C9 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1A94E032A792FE800AAC9C9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
