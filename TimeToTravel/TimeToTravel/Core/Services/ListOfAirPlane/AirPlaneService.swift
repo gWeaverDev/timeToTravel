@@ -1,0 +1,44 @@
+//
+//  AirPlaneService.swift
+//  TimeToTravel
+//
+//  Created by George Weaver on 01.08.2023.
+//
+
+import Foundation
+import Moya
+
+protocol AirPlaneServiceProtocol: AnyObject {
+    func getCheap(completion: @escaping (Result<TicketResponseModel, NetworkSeviceErrors>) -> Void)
+}
+
+final class AirPlaneService: AirPlaneServiceProtocol {
+    
+    private let apiManager: NetworkManager
+    
+    init(apiManager: NetworkManager) {
+        self.apiManager = apiManager
+    }
+    
+    func getCheap(completion: @escaping (Result<TicketResponseModel, NetworkSeviceErrors>) -> Void) {
+        apiManager.request(AirPlaneTarget.getCheap) { result in
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    guard let model = try? response.map(TicketResponseModel.self) else {
+                        completion(.failure(.jsonDecoderError))
+                        return
+                    }
+                    completion(.success(.init(data: model.data)))
+                case 400...500:
+                    completion(.failure(.noData))
+                default:
+                    completion(.failure(.unknow))
+                }
+            case .failure(let error):
+                completion(.failure(.somethingWentWrong(error.localizedDescription)))
+            }
+        }
+    }
+}

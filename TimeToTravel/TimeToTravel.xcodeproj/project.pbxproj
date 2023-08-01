@@ -22,6 +22,14 @@
 		C12E5EB42A78FD28003FF8FF /* UITableView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */; };
 		C12E5EB62A78FD5D003FF8FF /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */; };
 		C12E5EB92A790393003FF8FF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = C12E5EB82A790393003FF8FF /* Moya */; };
+		C12E5EBF2A790582003FF8FF /* AirPlaneTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EBE2A790582003FF8FF /* AirPlaneTarget.swift */; };
+		C12E5EC32A790593003FF8FF /* AirPlaneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EC22A790593003FF8FF /* AirPlaneService.swift */; };
+		C12E5EC72A7910E3003FF8FF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EC62A7910E3003FF8FF /* NetworkManager.swift */; };
+		C12E5EC92A79112A003FF8FF /* MultiMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EC82A79112A003FF8FF /* MultiMoyaProvider.swift */; };
+		C12E5ECB2A791160003FF8FF /* NetworkResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ECA2A791160003FF8FF /* NetworkResponseModel.swift */; };
+		C12E5ECD2A7912C2003FF8FF /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ECC2A7912C2003FF8FF /* ReachabilityManager.swift */; };
+		C12E5ECF2A7915FA003FF8FF /* NetworkServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ECE2A7915F9003FF8FF /* NetworkServiceErrors.swift */; };
+		C12E5ED12A79172B003FF8FF /* TicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5ED02A79172B003FF8FF /* TicketResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +49,14 @@
 		C12E5EB12A78FCAE003FF8FF /* UITableView+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; };
 		C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ViewModel.swift"; sourceTree = "<group>"; };
 		C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
+		C12E5EBE2A790582003FF8FF /* AirPlaneTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirPlaneTarget.swift; path = ../../../../../../../Desktop/AirPlaneTarget.swift; sourceTree = "<group>"; };
+		C12E5EC22A790593003FF8FF /* AirPlaneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlaneService.swift; sourceTree = "<group>"; };
+		C12E5EC62A7910E3003FF8FF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../../../../../../../Desktop/NetworkManager.swift; sourceTree = "<group>"; };
+		C12E5EC82A79112A003FF8FF /* MultiMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MultiMoyaProvider.swift; path = ../../../../../../../Desktop/MultiMoyaProvider.swift; sourceTree = "<group>"; };
+		C12E5ECA2A791160003FF8FF /* NetworkResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResponseModel.swift; path = ../../../../../../../Desktop/NetworkResponseModel.swift; sourceTree = "<group>"; };
+		C12E5ECC2A7912C2003FF8FF /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReachabilityManager.swift; path = ../../../../../../../Desktop/ReachabilityManager.swift; sourceTree = "<group>"; };
+		C12E5ECE2A7915F9003FF8FF /* NetworkServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkServiceErrors.swift; path = ../../../../../../../Desktop/NetworkServiceErrors.swift; sourceTree = "<group>"; };
+		C12E5ED02A79172B003FF8FF /* TicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TicketResponseModel.swift; path = ../../../../../../../../Desktop/TicketResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +165,7 @@
 		C12E5E9E2A78F99A003FF8FF /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C12E5EC42A7910CC003FF8FF /* Managers */,
 				C12E5E9F2A78F9B9003FF8FF /* Extensions */,
 				C12E5EA12A78F9D6003FF8FF /* Services */,
 				C12E5EA02A78F9CB003FF8FF /* Protocols */,
@@ -180,6 +197,7 @@
 		C12E5EA12A78F9D6003FF8FF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C12E5EBA2A790544003FF8FF /* ListOfAirPlane */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -211,6 +229,44 @@
 				C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */,
 			);
 			path = UITableView;
+			sourceTree = "<group>";
+		};
+		C12E5EBA2A790544003FF8FF /* ListOfAirPlane */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5EBD2A79056F003FF8FF /* Model */,
+				C12E5EBE2A790582003FF8FF /* AirPlaneTarget.swift */,
+				C12E5EC22A790593003FF8FF /* AirPlaneService.swift */,
+			);
+			path = ListOfAirPlane;
+			sourceTree = "<group>";
+		};
+		C12E5EBD2A79056F003FF8FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5ED02A79172B003FF8FF /* TicketResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C12E5EC42A7910CC003FF8FF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5EC52A7910D1003FF8FF /* Network */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		C12E5EC52A7910D1003FF8FF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5EC62A7910E3003FF8FF /* NetworkManager.swift */,
+				C12E5EC82A79112A003FF8FF /* MultiMoyaProvider.swift */,
+				C12E5ECA2A791160003FF8FF /* NetworkResponseModel.swift */,
+				C12E5ECC2A7912C2003FF8FF /* ReachabilityManager.swift */,
+				C12E5ECE2A7915F9003FF8FF /* NetworkServiceErrors.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,13 +349,21 @@
 				C12E5EAD2A78FBF3003FF8FF /* UIView+Layout.swift in Sources */,
 				C12E5EAF2A78FC61003FF8FF /* UIView+Reusable.swift in Sources */,
 				C12E5E872A78F834003FF8FF /* ListOfAirTravelVC.swift in Sources */,
+				C12E5ECD2A7912C2003FF8FF /* ReachabilityManager.swift in Sources */,
 				C12E5EB62A78FD5D003FF8FF /* UITableView+Reusable.swift in Sources */,
 				C12E5EA42A78FA7B003FF8FF /* FlightDetailsVC.swift in Sources */,
+				C12E5ED12A79172B003FF8FF /* TicketResponseModel.swift in Sources */,
+				C12E5ECF2A7915FA003FF8FF /* NetworkServiceErrors.swift in Sources */,
+				C12E5EC32A790593003FF8FF /* AirPlaneService.swift in Sources */,
 				C12E5EB22A78FCAE003FF8FF /* UITableView+Register.swift in Sources */,
 				C12E5EA82A78FB8C003FF8FF /* TableViewCellModelProtocol.swift in Sources */,
 				C12E5E832A78F834003FF8FF /* AppDelegate.swift in Sources */,
 				C12E5E852A78F834003FF8FF /* SceneDelegate.swift in Sources */,
+				C12E5EBF2A790582003FF8FF /* AirPlaneTarget.swift in Sources */,
+				C12E5EC72A7910E3003FF8FF /* NetworkManager.swift in Sources */,
 				C12E5EAA2A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift in Sources */,
+				C12E5EC92A79112A003FF8FF /* MultiMoyaProvider.swift in Sources */,
+				C12E5ECB2A791160003FF8FF /* NetworkResponseModel.swift in Sources */,
 				C12E5EA62A78FB4E003FF8FF /* Reusable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
