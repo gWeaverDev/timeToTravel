@@ -9,44 +9,65 @@ import Foundation
 
 protocol ListOfAirTravelVM: AnyObject {
     func numberOfRows() -> Int
-    func getData(_ completion: @escaping () -> Void)
+    func getData()
     func cellData(for indexPath: IndexPath) -> AnyTableViewCellModelProtocol
+    var stateChanger: ((ListOfAirTravelVMImpl.State) -> Void)? { get set }
+}
+
+protocol ListOfAirNavigation: AnyObject {
+    func goToListOfAir()
+    func goToFlightDetail(with data: Flight, and isLiked: Bool)
 }
 
 final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     
-    var cellModels: [AnyTableViewCellModelProtocol] = []
-    private let service: AirPlaneServiceProtocol
+    enum State {
+        case loading
+        case loaded
+        case failLoad(String)
+    }
     
-    init() {
+    var stateChanger: ((State) -> Void)?
+    var cellModels: [AnyTableViewCellModelProtocol] = []
+    weak var navigation: ListOfAirNavigation?
+    private let service: AirPlaneServiceProtocol
+    private var state: State = .loading {
+        didSet {
+            self.stateChanger?(state)
+        }
+    }
+    
+    init(navigation: ListOfAirNavigation) {
         let api = NetworkManager()
         self.service = AirPlaneService(apiManager: api)
+        self.navigation = navigation
     }
     
     func numberOfRows() -> Int {
         return cellModels.count
     }
     
-    func getData(_ completion: @escaping () -> Void) {
-        
+    func getData() {
         let emptyModel = EmptyCellVM(.init(height: 15))
         
         getCheap { [weak self] models in
             models.flights.forEach {
                 let ticketModel = AirTravelCellVM(
                     model: .init(
-                        likeState: false,
-                        startDate: $0.startDate,
+                        startDate: $0.startDate.getDayAndMonth() ?? "",
                         startCity: $0.startCity,
-                        endDate: $0.endDate,
+                        endDate: $0.endDate.getDayAndMonth() ?? "",
                         endCity: $0.endCity,
-                        price: $0.price
+                        price: "\($0.price)₽"
                     )
                 )
                 self?.cellModels.append(ticketModel)
+                let flightData = $0
+                ticketModel.cellTapped = { [weak self] in
+                    self?.showFlightDetail(with: flightData, and: false)
+                }
                 self?.cellModels.append(emptyModel)
             }
-            completion()
         }
     }
     
@@ -55,23 +76,24 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     }
     
     private func getCheap(completion: @escaping (TicketResponseModel) -> Void) {
+        state = .loading
         service.getCheap { [weak self] result in
             switch result {
             case .success(let model):
                 completion(.init(flights: model.flights))
+                self?.state = .loaded
             case .failure(let error):
-                self?.showAlert(
-                    title: "Что-то пошло не так",
-                    description: error.localizedDescription,
-                    buttonTitle: "Хорошо",
-                    buttonCallback: nil
-                )
+                self?.state = .failLoad(error.errorDescription)
             }
         }
     }
     
-    private func showAlert(title: String, description: String, buttonTitle: String, buttonCallback: (() -> Void)?) {
-        //TODO: - show alertMessage
+    private func showListOfAirDetail() {
+        navigation?.goToListOfAir()
+    }
+    
+    private func showFlightDetail(with data: Flight, and isLiked: Bool) {
+        navigation?.goToFlightDetail(with: data, and: isLiked)
     }
     
 }

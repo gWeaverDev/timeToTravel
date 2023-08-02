@@ -12,6 +12,8 @@ final class ListOfAirTravelVC: UIViewController {
     
     private let viewModel: ListOfAirTravelVM
     
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = .clear
@@ -34,13 +36,8 @@ final class ListOfAirTravelVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.getData { [weak self] in
-            self?.tableView.reloadData()
-        }
+        binding()
+        viewModel.getData()
     }
     
     private func setupUI() {
@@ -49,8 +46,29 @@ final class ListOfAirTravelVC: UIViewController {
         tableView.dataSource = self
     }
     
+    private func binding() {
+        viewModel.stateChanger = { [weak self] state in
+            guard let self = self else { return }
+            switch state {
+            case .loading:
+                self.activityIndicator.startAnimating()
+            case .loaded:
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+            case .failLoad(let errorString):
+                self.activityIndicator.stopAnimating()
+                AlertNotifications.shared.presentAlert(for: self, errorString)
+            }
+        }
+    }
+    
     private func setupLayout() {
-        view.addSubviewsWithoutAutoresizing(tableView)
+        view.addSubviewsWithoutAutoresizing(activityIndicator, tableView)
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top)
@@ -73,5 +91,22 @@ extension ListOfAirTravelVC: UITableViewDelegate, UITableViewDataSource {
         model.configureAny(cell)
         return cell
     }
+}
+
+final class AlertNotifications {
+    
+   static let shared = AlertNotifications()
+    
+   private init () {}
+    
+    func presentAlert(for viewController: UIViewController, _ text: String) {
+        
+        let alertController = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(okAction)
+        viewController.present(alertController, animated: true)
+    }
+    
 }
 
