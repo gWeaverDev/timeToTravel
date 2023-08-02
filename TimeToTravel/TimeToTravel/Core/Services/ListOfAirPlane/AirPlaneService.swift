@@ -36,10 +36,10 @@ final class AirPlaneService: AirPlaneServiceProtocol {
                         return
                     }
                     completion(.success(.init(flights: model.flights)))
-                case 400...500:
+                case 400...499:
                     completion(.failure(.noData))
                 default:
-                    completion(.failure(.unknow))
+                    completion(.failure(.serverError))
                 }
             case .failure(let error):
                 completion(.failure(.somethingWentWrong(error.localizedDescription)))
