@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class AirTravelCell: UITableViewCell {
+final class AirTravelCell: UICollectionViewCell {
 
     struct Model {
         let startDate: String
@@ -76,8 +76,8 @@ final class AirTravelCell: UITableViewCell {
         return view
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         cellAppearance()
         addTargets()
         setupLayout()
@@ -98,7 +98,6 @@ final class AirTravelCell: UITableViewCell {
     private func cellAppearance() {
         backgroundColor = .white
         layer.cornerRadius = 10
-        selectionStyle = .none
     }
     
     private func addTargets() {
@@ -129,7 +128,6 @@ final class AirTravelCell: UITableViewCell {
         startCity.snp.makeConstraints {
             $0.top.equalTo(startDate.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(10)
-            $0.bottom.equalToSuperview().inset(25)
         }
         
         horizontalSeparatorLine.snp.makeConstraints {
@@ -148,7 +146,6 @@ final class AirTravelCell: UITableViewCell {
         endCity.snp.makeConstraints {
             $0.top.equalTo(endDate.snp.bottom).offset(5)
             $0.trailing.equalTo(verticalSeparatorLine.snp.leading).offset(-10)
-            $0.bottom.equalToSuperview().inset(25)
         }
         
         verticalSeparatorLine.snp.makeConstraints {

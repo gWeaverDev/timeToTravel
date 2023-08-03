@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AirTravelCellVM: TableViewCellModelProtocol {
+final class AirTravelCellVM: CollectionViewCellModelProtocol {
     
     var cellTapped: (() -> Void)?
     var isLiked: (() -> Void)?

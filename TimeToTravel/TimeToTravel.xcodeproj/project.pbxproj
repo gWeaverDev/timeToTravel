@@ -17,13 +17,11 @@
 		C12E5EAA2A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EA92A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift */; };
 		C12E5EAD2A78FBF3003FF8FF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EAC2A78FBF3003FF8FF /* UIView+Layout.swift */; };
 		C12E5EAF2A78FC61003FF8FF /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EAE2A78FC61003FF8FF /* UIView+Reusable.swift */; };
-		C12E5EB22A78FCAE003FF8FF /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB12A78FCAE003FF8FF /* UITableView+Register.swift */; };
-		C12E5EB42A78FD28003FF8FF /* UITableView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */; };
-		C12E5EB62A78FD5D003FF8FF /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */; };
 		C12E5EB92A790393003FF8FF /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = C12E5EB82A790393003FF8FF /* Moya */; };
 		C12E5EC32A790593003FF8FF /* AirPlaneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EC22A790593003FF8FF /* AirPlaneService.swift */; };
 		C12E5EDE2A792590003FF8FF /* ListOfAirTravelVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */; };
 		C12E5EE02A7928EF003FF8FF /* AirTravelCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */; };
+		C191631C2A7BA81A006A52AF /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C191631B2A7BA81A006A52AF /* AlertManager.swift */; };
 		C1A94E052A792FE800AAC9C9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C1A94E042A792FE800AAC9C9 /* SnapKit */; };
 		C1A94E082A7943F000AAC9C9 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A94E072A7943F000AAC9C9 /* String+Date.swift */; };
 		C1A94E0A2A795DA300AAC9C9 /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A94E092A795DA300AAC9C9 /* EmptyCell.swift */; };
@@ -59,12 +57,10 @@
 		C12E5EA92A78FBA8003FF8FF /* AnyReusableViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyReusableViewModelProtocol.swift; sourceTree = "<group>"; };
 		C12E5EAC2A78FBF3003FF8FF /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		C12E5EAE2A78FC61003FF8FF /* UIView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Reusable.swift"; sourceTree = "<group>"; };
-		C12E5EB12A78FCAE003FF8FF /* UITableView+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; };
-		C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ViewModel.swift"; sourceTree = "<group>"; };
-		C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		C12E5EC22A790593003FF8FF /* AirPlaneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlaneService.swift; sourceTree = "<group>"; };
 		C12E5EDD2A792590003FF8FF /* ListOfAirTravelVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAirTravelVM.swift; sourceTree = "<group>"; };
 		C12E5EDF2A7928EF003FF8FF /* AirTravelCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTravelCellVM.swift; sourceTree = "<group>"; };
+		C191631B2A7BA81A006A52AF /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		C1A94E072A7943F000AAC9C9 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		C1A94E092A795DA300AAC9C9 /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		C1A94E0B2A795DD100AAC9C9 /* EmptyCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellVM.swift; sourceTree = "<group>"; };
@@ -196,7 +192,6 @@
 			children = (
 				C1A94E132A79746A00AAC9C9 /* UICollectionView */,
 				C1A94E072A7943F000AAC9C9 /* String+Date.swift */,
-				C12E5EB02A78FC80003FF8FF /* UITableView */,
 				C12E5EAB2A78FBE7003FF8FF /* UIView */,
 			);
 			path = Extensions;
@@ -240,16 +235,6 @@
 			path = UIView;
 			sourceTree = "<group>";
 		};
-		C12E5EB02A78FC80003FF8FF /* UITableView */ = {
-			isa = PBXGroup;
-			children = (
-				C12E5EB52A78FD5D003FF8FF /* UITableView+Reusable.swift */,
-				C12E5EB12A78FCAE003FF8FF /* UITableView+Register.swift */,
-				C12E5EB32A78FD28003FF8FF /* UITableView+ViewModel.swift */,
-			);
-			path = UITableView;
-			sourceTree = "<group>";
-		};
 		C12E5EBA2A790544003FF8FF /* ListOfAirPlane */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +256,7 @@
 		C12E5EC42A7910CC003FF8FF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				C191631A2A7BA80E006A52AF /* AlertManager */,
 				C12E5EC52A7910D1003FF8FF /* Network */,
 			);
 			path = Managers;
@@ -305,6 +291,14 @@
 				C1A94E0B2A795DD100AAC9C9 /* EmptyCellVM.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C191631A2A7BA80E006A52AF /* AlertManager */ = {
+			isa = PBXGroup;
+			children = (
+				C191631B2A7BA81A006A52AF /* AlertManager.swift */,
+			);
+			path = AlertManager;
 			sourceTree = "<group>";
 		};
 		C1A94E0D2A79690800AAC9C9 /* ViewModel */ = {
@@ -412,24 +406,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C12E5EB42A78FD28003FF8FF /* UITableView+ViewModel.swift in Sources */,
 				C12E5EAD2A78FBF3003FF8FF /* UIView+Layout.swift in Sources */,
 				C1A94E1F2A7AE2DA00AAC9C9 /* AppCoordinator.swift in Sources */,
 				C12E5EDE2A792590003FF8FF /* ListOfAirTravelVM.swift in Sources */,
 				C12E5EAF2A78FC61003FF8FF /* UIView+Reusable.swift in Sources */,
 				C12E5E872A78F834003FF8FF /* ListOfAirTravelVC.swift in Sources */,
-				C12E5EB62A78FD5D003FF8FF /* UITableView+Reusable.swift in Sources */,
 				C1A94E272A7B1B1200AAC9C9 /* MultiMoyaProvider.swift in Sources */,
 				C12E5EA42A78FA7B003FF8FF /* FlightDetailsVC.swift in Sources */,
 				C1A94E1B2A79756700AAC9C9 /* CollectionViewCellModelProtocol.swift in Sources */,
 				C1A94E292A7B1B1200AAC9C9 /* NetworkServiceErrors.swift in Sources */,
 				C12E5EC32A790593003FF8FF /* AirPlaneService.swift in Sources */,
-				C12E5EB22A78FCAE003FF8FF /* UITableView+Register.swift in Sources */,
 				C1A94E2F2A7B1B8100AAC9C9 /* AirTravelCell.swift in Sources */,
 				C1A94E252A7B1B1200AAC9C9 /* ReachabilityManager.swift in Sources */,
 				C1A94E082A7943F000AAC9C9 /* String+Date.swift in Sources */,
 				C12E5EA82A78FB8C003FF8FF /* TableViewCellModelProtocol.swift in Sources */,
 				C1A94E2D2A7B1B3E00AAC9C9 /* TicketResponseModel.swift in Sources */,
+				C191631C2A7BA81A006A52AF /* AlertManager.swift in Sources */,
 				C1A94E262A7B1B1200AAC9C9 /* NetworkResponseModel.swift in Sources */,
 				C1A94E0A2A795DA300AAC9C9 /* EmptyCell.swift in Sources */,
 				C1A94E282A7B1B1200AAC9C9 /* NetworkManager.swift in Sources */,
