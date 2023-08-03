@@ -14,13 +14,12 @@ final class ListOfAirTravelVC: UIViewController {
     
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.backgroundColor = .clear
-        table.showsVerticalScrollIndicator = false
-        table.separatorStyle = .none
-        table.registerCells(withModels: AirTravelCellVM.self, EmptyCellVM.self)
-        return table
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
+        collection.backgroundColor = .clear
+        collection.showsVerticalScrollIndicator = false
+        collection.registerCells(withModels: AirTravelCellVM.self)
+        return collection
     }()
     
     init(viewModel: ListOfAirTravelVM) {
@@ -40,10 +39,17 @@ final class ListOfAirTravelVC: UIViewController {
         viewModel.getData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setupUI() {
         view.backgroundColor = .purple
-        tableView.delegate = self
-        tableView.dataSource = self
+        title = "Авибилеты"
+
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     private func binding() {
@@ -53,60 +59,60 @@ final class ListOfAirTravelVC: UIViewController {
             case .loading:
                 self.activityIndicator.startAnimating()
             case .loaded:
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 self.activityIndicator.stopAnimating()
             case .failLoad(let errorString):
                 self.activityIndicator.stopAnimating()
-                AlertNotifications.shared.presentAlert(for: self, errorString)
+                AlertManager.shared.presentAlert(for: self, errorString)
             }
         }
     }
     
     private func setupLayout() {
-        view.addSubviewsWithoutAutoresizing(activityIndicator, tableView)
+        view.addSubviewsWithoutAutoresizing(activityIndicator, collectionView)
         
         activityIndicator.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaInsets.bottom).offset(25)
         }
     }
+    
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { sectionIndex, enviroment in
+            return self.createSections()
+        }
+    }
+    
+    private func createSections() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(120))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        return section
+    }
 }
 
-extension ListOfAirTravelVC: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ListOfAirTravelVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = viewModel.cellData(for: indexPath)
-        let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath)
         model.configureAny(cell)
         return cell
     }
-}
-
-final class AlertNotifications {
-    
-   static let shared = AlertNotifications()
-    
-   private init () {}
-    
-    func presentAlert(for viewController: UIViewController, _ text: String) {
-        
-        let alertController = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        alertController.addAction(okAction)
-        viewController.present(alertController, animated: true)
-    }
-    
 }
 

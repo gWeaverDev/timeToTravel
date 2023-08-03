@@ -10,7 +10,7 @@ import Foundation
 protocol ListOfAirTravelVM: AnyObject {
     func numberOfRows() -> Int
     func getData()
-    func cellData(for indexPath: IndexPath) -> AnyTableViewCellModelProtocol
+    func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
     var stateChanger: ((ListOfAirTravelVMImpl.State) -> Void)? { get set }
 }
 
@@ -28,7 +28,7 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     }
     
     var stateChanger: ((State) -> Void)?
-    var cellModels: [AnyTableViewCellModelProtocol] = []
+    var cellModels: [AnyCollectionViewCellModelProtocol] = []
     weak var navigation: ListOfAirNavigation?
     private let service: AirPlaneServiceProtocol
     private var state: State = .loading {
@@ -48,8 +48,6 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     }
     
     func getData() {
-        let emptyModel = EmptyCellVM(.init(height: 15))
-        
         getCheap { [weak self] models in
             models.flights.forEach {
                 let ticketModel = AirTravelCellVM(
@@ -66,12 +64,11 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
                 ticketModel.cellTapped = { [weak self] in
                     self?.showFlightDetail(with: flightData, and: false)
                 }
-                self?.cellModels.append(emptyModel)
             }
         }
     }
     
-    func cellData(for indexPath: IndexPath) -> AnyTableViewCellModelProtocol {
+    func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol {
         return cellModels[indexPath.row]
     }
     
