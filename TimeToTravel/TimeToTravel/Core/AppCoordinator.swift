@@ -41,8 +41,8 @@ extension AppCoordinator: ListOfAirNavigation {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func goToFlightDetail(with data: Flight, and isLiked: Bool) {
-        let viewModel = FlightDetailVMImpl(data: data, isLiked: isLiked)
+    func goToFlightDetail(with data: Ticket, delegate: TicketStateDelegate) {
+        let viewModel = FlightDetailVMImpl(data: data, ticketStateDelegate: delegate)
         let vc = FlightDetailsVC(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: true)
     }

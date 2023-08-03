@@ -11,14 +11,14 @@ final class AirTravelCellVM: CollectionViewCellModelProtocol {
     
     var cellTapped: (() -> Void)?
     
-    private let model: AirTravelCell.Model
+    var model: Ticket
     
-    init(model: AirTravelCell.Model) {
+    init(model: Ticket) {
         self.model = model
     }
     
     func configure(_ cell: AirTravelCell) {
-        cell.fill(with: self.model)
+        cell.fill(with: model)
         cell.routing = cellTapped
     }
 }

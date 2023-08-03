@@ -10,14 +10,9 @@ import SnapKit
 
 final class FlightDetailCell: UICollectionViewCell {
     
-    struct Model {
-        let likeState: Bool
-        let startDate: String
-        let startCity: String
-        let endDate: String
-        let endCity: String
-        let price: String
-    }
+    weak var delegate: FlightDetailsDelegate?
+    
+    private var ticketModel: Ticket?
     
     private let flightLabel: UILabel = {
         let label = UILabel()
@@ -101,14 +96,15 @@ final class FlightDetailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func fill(with model: Model) {
+    func fill(with model: Ticket) {
+        self.ticketModel = model
         flightLabel.text = "\(model.startCity) - \(model.endCity)"
         startDate.text = model.startDate
         endDate.text = model.endDate
         startCity.text = model.startCity
         endCity.text = model.endCity
         buyButton.setTitle(model.price, for: .normal)
-        likeButton.isSelected = model.likeState
+        likeButton.isSelected = model.isLiked
     }
     
     private func cellAppearance() {
@@ -123,7 +119,9 @@ final class FlightDetailCell: UICollectionViewCell {
     
     @objc
     private func likeTapped(_ sender: UIButton) {
-        likeButton.isSelected = !likeButton.isSelected
+        guard let ticket = ticketModel else { return }
+        likeButton.isSelected.toggle()
+        delegate?.likeButtonTapped(for: ticket)
     }
     
     private func setupLayout() {

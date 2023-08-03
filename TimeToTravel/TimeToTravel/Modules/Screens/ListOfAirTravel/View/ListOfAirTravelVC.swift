@@ -8,17 +8,24 @@
 import UIKit
 import SnapKit
 
+protocol ListOfAirTravelDelegate: AnyObject {
+    func likeButtonTapped(for ticket: Ticket)
+}
+
 final class ListOfAirTravelVC: UIViewController {
     
     private let viewModel: ListOfAirTravelVM
     
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+    private var navBarHeight: CGFloat = 0
     
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collection.backgroundColor = .clear
         collection.showsVerticalScrollIndicator = false
         collection.registerCells(withModels: AirTravelCellVM.self)
+        collection.delegate = self
+        collection.dataSource = self
         return collection
     }()
     
@@ -33,7 +40,7 @@ final class ListOfAirTravelVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupAppearance()
         setupLayout()
         binding()
         viewModel.getData()
@@ -41,15 +48,37 @@ final class ListOfAirTravelVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let navBar = navigationController?.navigationBar else { return }
+        navBar.prefersLargeTitles = true
         collectionView.reloadData()
     }
-    
-    private func setupUI() {
-        view.backgroundColor = .purple
-        title = "Авибилеты"
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let navBar = navigationController?.navigationBar else { return }
+        navBar.prefersLargeTitles = false
+    }
+    
+    private func setupAppearance() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        title = "Авиабилеты"
+        view.backgroundColor = .purple
+        navBarHeight = navBar.frame.size.height + 80
+    }
+    
+    private func setupLayout() {
+        view.addSubviewsWithoutAutoresizing(activityIndicator, collectionView)
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaInsets.top).offset(navBarHeight)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaInsets.bottom)
+        }
     }
     
     private func binding() {
@@ -64,23 +93,9 @@ final class ListOfAirTravelVC: UIViewController {
             case .failLoad(let errorString):
                 self.activityIndicator.stopAnimating()
                 AlertManager.shared.presentAlert(for: self, errorString)
+            case .reloadCollection(let indexPath):
+                self.collectionView.reloadItems(at: [indexPath])
             }
-        }
-    }
-    
-    private func setupLayout() {
-        view.addSubviewsWithoutAutoresizing(activityIndicator, collectionView)
-        
-        activityIndicator.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.centerX.equalToSuperview()
-        }
-        
-        collectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaInsets.top)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaInsets.bottom).offset(25)
         }
     }
     
@@ -114,8 +129,15 @@ extension ListOfAirTravelVC: UICollectionViewDelegate, UICollectionViewDataSourc
             return UICollectionViewCell()
         }
         model.configureAny(cell)
-        
+        cell.delegate = self
         return cell
+    }
+}
+
+extension ListOfAirTravelVC: ListOfAirTravelDelegate {
+    
+    func likeButtonTapped(for ticket: Ticket) {
+        viewModel.likeTappedInCell(ticket: ticket)
     }
 }
 
