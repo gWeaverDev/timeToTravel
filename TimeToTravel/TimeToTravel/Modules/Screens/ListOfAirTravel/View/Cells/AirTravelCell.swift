@@ -18,7 +18,6 @@ final class AirTravelCell: UICollectionViewCell {
         let price: String
     }
     
-    var likeButtonTapped: (() -> Void)?
     var routing: (() -> Void)?
     
     private let likeButton: UIButton = {
@@ -109,7 +108,6 @@ final class AirTravelCell: UICollectionViewCell {
     @objc
     private func likeTapped(_ sender: UIButton) {
         likeButton.isSelected.toggle()
-        likeButtonTapped?()
     }
     
     @objc

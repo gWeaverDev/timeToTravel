@@ -8,23 +8,38 @@
 import Foundation
 
 protocol FlightDetailVM: AnyObject {
-    func getData(_ completion: @escaping () -> Void)
+    var stateChange: ((FlightDetailVMImpl.State) -> Void)? { get set }
+    func getData()
     func numberOfRows() -> Int
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
 }
 
 final class FlightDetailVMImpl: FlightDetailVM {
     
+    enum State {
+        case loading
+        case loaded
+        case failLoad(String)
+    }
+    
+    var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
     private var ticketData: Flight
     private var isLiked: Bool
+    private var state: State = .loading {
+        didSet {
+            self.stateChange?(state)
+        }
+    }
     
     init(data: Flight, isLiked: Bool) {
         self.ticketData = data
         self.isLiked = isLiked
     }
     
-    func getData(_ completion: @escaping () -> Void) {
+    func getData() {
+        
+        
         
         let detailModel = FlightDetailsCellVM(
             model: .init(
