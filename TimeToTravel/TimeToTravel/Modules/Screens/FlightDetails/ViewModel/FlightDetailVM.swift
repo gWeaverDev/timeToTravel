@@ -12,43 +12,42 @@ protocol FlightDetailVM: AnyObject {
     func getData()
     func numberOfRows() -> Int
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
+    func likeTappedInCell()
 }
 
 final class FlightDetailVMImpl: FlightDetailVM {
     
     enum State {
-        case loading
-        case loaded
-        case failLoad(String)
+        case isLiked
     }
+    
+    weak var delegate: ListOfAirTravelDelegate?
+    weak var ticketStateDelegate: TicketStateDelegate?
     
     var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
-    private var ticketData: Flight
-    private var isLiked: Bool
-    private var state: State = .loading {
+    
+    private var ticketData: Ticket
+    private var state: State = .isLiked {
         didSet {
             self.stateChange?(state)
         }
     }
     
-    init(data: Flight, isLiked: Bool) {
+    init(data: Ticket, ticketStateDelegate: TicketStateDelegate?) {
         self.ticketData = data
-        self.isLiked = isLiked
+        self.ticketStateDelegate = ticketStateDelegate
     }
     
     func getData() {
-        
-        
-        
         let detailModel = FlightDetailsCellVM(
             model: .init(
-                likeState: isLiked,
                 startDate: ticketData.startDate.getDayAndMonth() ?? "",
-                startCity: ticketData.startCity,
                 endDate: ticketData.endDate.getDayAndMonth() ?? "",
+                startCity: ticketData.startCity,
                 endCity: ticketData.endCity,
-                price: "\(ticketData.price)₽"
+                price: ticketData.price,
+                isLiked: ticketData.isLiked
             )
         )
 
@@ -61,5 +60,9 @@ final class FlightDetailVMImpl: FlightDetailVM {
     
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol {
         return cellModels[indexPath.row]
+    }
+    
+    func likeTappedInCell() {
+        ticketStateDelegate?.likeTappedInCell(in: ticketData)
     }
 }

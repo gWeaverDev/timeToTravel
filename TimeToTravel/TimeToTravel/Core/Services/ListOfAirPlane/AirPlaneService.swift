@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 protocol AirPlaneServiceProtocol: AnyObject {
-    func getCheap(completion: @escaping (Result<TicketResponseModel, NetworkSeviceErrors>) -> Void)
+    func getCheap(completion: @escaping (Result<[Ticket], NetworkSeviceErrors>) -> Void)
 }
 
 final class AirPlaneService: AirPlaneServiceProtocol {
@@ -25,7 +25,7 @@ final class AirPlaneService: AirPlaneServiceProtocol {
         self.apiManager = apiManager
     }
     
-    func getCheap(completion: @escaping (Result<TicketResponseModel, NetworkSeviceErrors>) -> Void) {
+    func getCheap(completion: @escaping (Result<[Ticket], NetworkSeviceErrors>) -> Void) {
         apiManager.request(AirPlaneTarget.getCheap) { result in
             switch result {
             case .success(let response):
@@ -35,7 +35,17 @@ final class AirPlaneService: AirPlaneServiceProtocol {
                         completion(.failure(.jsonDecoderError))
                         return
                     }
-                    completion(.success(.init(flights: model.flights)))
+                    let tickets = model.flights.map {
+                        Ticket(
+                            startDate: $0.startDate.getDayAndMonth() ?? "",
+                            endDate: $0.endDate.getDayAndMonth() ?? "",
+                            startCity: $0.startCity,
+                            endCity: $0.endCity,
+                            price: "\($0.price)₽",
+                            isLiked: false
+                        )
+                    }
+                    completion(.success(tickets))
                 case 400...499:
                     completion(.failure(.noData))
                 default:

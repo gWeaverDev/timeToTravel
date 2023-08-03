@@ -9,9 +9,9 @@ import Foundation
 
 final class FlightDetailsCellVM: CollectionViewCellModelProtocol {
     
-    private let model: FlightDetailCell.Model
+    private let model: Ticket
     
-    init(model: FlightDetailCell.Model) {
+    init(model: Ticket) {
         self.model = model
     }
     

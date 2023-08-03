@@ -8,17 +8,21 @@
 import UIKit
 import SnapKit
 
+protocol FlightDetailsDelegate: AnyObject {
+    func likeButtonTapped(for ticket: Ticket)
+}
+
 final class FlightDetailsVC: UIViewController {
     
     private let viewModel: FlightDetailVM
-    
-    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collection.backgroundColor = .clear
         collection.showsVerticalScrollIndicator = false
         collection.registerCells(withModels: FlightDetailsCellVM.self)
+        collection.delegate = self
+        collection.dataSource = self
         return collection
     }()
     
@@ -33,7 +37,7 @@ final class FlightDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupAppearance()
         setupLayout()
         binding()
         viewModel.getData()
@@ -44,25 +48,17 @@ final class FlightDetailsVC: UIViewController {
         collectionView.reloadData()
     }
     
-    private func setupUI() {
+    private func setupAppearance() {
         view.backgroundColor = .purple
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
     
     private func setupLayout() {
-        view.addSubviewsWithoutAutoresizing(activityIndicator, collectionView)
-        
-        activityIndicator.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.centerX.equalToSuperview()
-        }
+        view.addSubviewsWithoutAutoresizing(collectionView)
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaInsets.bottom).offset(25)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaInsets.bottom)
         }
     }
     
@@ -77,14 +73,8 @@ final class FlightDetailsVC: UIViewController {
             guard let self = self else { return }
             
             switch state {
-            case .loading:
-                self.activityIndicator.startAnimating()
-            case .loaded:
+            case .isLiked:
                 self.collectionView.reloadData()
-                self.activityIndicator.stopAnimating()
-            case .failLoad(let errorString):
-                self.activityIndicator.stopAnimating()
-                AlertManager.shared.presentAlert(for: self, errorString)
             }
         }
     }
@@ -112,8 +102,18 @@ extension FlightDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let model = viewModel.cellData(for: indexPath)
-        let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath) as? FlightDetailCell else {
+            return UICollectionViewCell()
+        }
+        cell.delegate = self
         model.configureAny(cell)
         return cell
+    }
+}
+
+extension FlightDetailsVC: FlightDetailsDelegate {
+    
+    func likeButtonTapped(for ticket: Ticket) {
+        viewModel.likeTappedInCell()
     }
 }
