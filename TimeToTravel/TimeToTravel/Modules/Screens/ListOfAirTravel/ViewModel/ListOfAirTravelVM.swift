@@ -8,10 +8,10 @@
 import Foundation
 
 protocol ListOfAirTravelVM: AnyObject {
+    var stateChange: ((ListOfAirTravelVMImpl.State) -> Void)? { get set }
     func numberOfRows() -> Int
     func getData()
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
-    var stateChanger: ((ListOfAirTravelVMImpl.State) -> Void)? { get set }
 }
 
 protocol ListOfAirNavigation: AnyObject {
@@ -27,13 +27,15 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
         case failLoad(String)
     }
     
-    var stateChanger: ((State) -> Void)?
-    var cellModels: [AnyCollectionViewCellModelProtocol] = []
     weak var navigation: ListOfAirNavigation?
+    
+    var stateChange: ((State) -> Void)?
+    var cellModels: [AnyCollectionViewCellModelProtocol] = []
+    
     private let service: AirPlaneServiceProtocol
     private var state: State = .loading {
         didSet {
-            self.stateChanger?(state)
+            self.stateChange?(state)
         }
     }
     

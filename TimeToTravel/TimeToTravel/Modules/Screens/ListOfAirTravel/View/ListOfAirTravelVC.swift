@@ -53,7 +53,7 @@ final class ListOfAirTravelVC: UIViewController {
     }
     
     private func binding() {
-        viewModel.stateChanger = { [weak self] state in
+        viewModel.stateChange = { [weak self] state in
             guard let self = self else { return }
             switch state {
             case .loading:
@@ -110,8 +110,11 @@ extension ListOfAirTravelVC: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = viewModel.cellData(for: indexPath)
-        let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath) as? AirTravelCell else {
+            return UICollectionViewCell()
+        }
         model.configureAny(cell)
+        
         return cell
     }
 }

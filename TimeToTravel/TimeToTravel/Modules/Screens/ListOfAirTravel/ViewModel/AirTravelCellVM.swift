@@ -10,7 +10,6 @@ import Foundation
 final class AirTravelCellVM: CollectionViewCellModelProtocol {
     
     var cellTapped: (() -> Void)?
-    var isLiked: (() -> Void)?
     
     private let model: AirTravelCell.Model
     
@@ -21,6 +20,5 @@ final class AirTravelCellVM: CollectionViewCellModelProtocol {
     func configure(_ cell: AirTravelCell) {
         cell.fill(with: self.model)
         cell.routing = cellTapped
-        cell.likeButtonTapped = isLiked
     }
 }
