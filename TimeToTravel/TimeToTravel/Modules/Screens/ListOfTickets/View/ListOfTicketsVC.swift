@@ -1,5 +1,5 @@
 //
-//  ListOfAirTravelVC.swift
+//  ListOfTicketsVC.swift
 //  TimeToTravel
 //
 //  Created by George Weaver on 01.08.2023.
@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-protocol ListOfAirTravelDelegate: AnyObject {
+protocol ListOfTicketsDelegate: AnyObject {
     func likeButtonTapped(for ticket: Ticket)
 }
 
-final class ListOfAirTravelVC: UIViewController {
+final class ListOfTicketsVC: UIViewController {
     
-    private let viewModel: ListOfAirTravelVM
+    private let viewModel: ListOfTicketsVM
     
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     private var navBarHeight: CGFloat = 0
@@ -23,13 +23,13 @@ final class ListOfAirTravelVC: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         collection.backgroundColor = .clear
         collection.showsVerticalScrollIndicator = false
-        collection.registerCells(withModels: AirTravelCellVM.self)
+        collection.registerCells(withModels: TicketCellVM.self)
         collection.delegate = self
         collection.dataSource = self
         return collection
     }()
     
-    init(viewModel: ListOfAirTravelVM) {
+    init(viewModel: ListOfTicketsVM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,24 +46,11 @@ final class ListOfAirTravelVC: UIViewController {
         viewModel.getData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard let navBar = navigationController?.navigationBar else { return }
-        navBar.prefersLargeTitles = true
-        collectionView.reloadData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        guard let navBar = navigationController?.navigationBar else { return }
-        navBar.prefersLargeTitles = false
-    }
-    
     private func setupAppearance() {
         guard let navBar = navigationController?.navigationBar else { return }
         title = "Авиабилеты"
         view.backgroundColor = .purple
-        navBarHeight = navBar.frame.size.height + 80
+        navBarHeight = navBar.frame.size.height + 40
     }
     
     private func setupLayout() {
@@ -118,14 +105,14 @@ final class ListOfAirTravelVC: UIViewController {
     }
 }
 
-extension ListOfAirTravelVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ListOfTicketsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = viewModel.cellData(for: indexPath)
-        guard let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath) as? AirTravelCell else {
+        guard let cell = collectionView.dequeueReusableCell(withModel: model, for: indexPath) as? TicketCell else {
             return UICollectionViewCell()
         }
         model.configureAny(cell)
@@ -134,7 +121,7 @@ extension ListOfAirTravelVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 }
 
-extension ListOfAirTravelVC: ListOfAirTravelDelegate {
+extension ListOfTicketsVC: ListOfTicketsDelegate {
     
     func likeButtonTapped(for ticket: Ticket) {
         viewModel.likeTappedInCell(ticket: ticket)

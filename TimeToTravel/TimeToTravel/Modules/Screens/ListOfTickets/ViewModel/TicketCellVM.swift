@@ -1,5 +1,5 @@
 //
-//  AirTravelCellVM.swift
+//  TicketCellVM.swift
 //  TimeToTravel
 //
 //  Created by George Weaver on 01.08.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AirTravelCellVM: CollectionViewCellModelProtocol {
+final class TicketCellVM: CollectionViewCellModelProtocol {
     
     var cellTapped: (() -> Void)?
     
@@ -17,7 +17,7 @@ final class AirTravelCellVM: CollectionViewCellModelProtocol {
         self.model = model
     }
     
-    func configure(_ cell: AirTravelCell) {
+    func configure(_ cell: TicketCell) {
         cell.fill(with: model)
         cell.routing = cellTapped
     }

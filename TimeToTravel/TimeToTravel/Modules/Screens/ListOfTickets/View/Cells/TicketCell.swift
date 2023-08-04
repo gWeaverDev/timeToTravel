@@ -1,5 +1,5 @@
 //
-//  AirTravelCell.swift
+//  TicketCell.swift
 //  TimeToTravel
 //
 //  Created by George Weaver on 01.08.2023.
@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-final class AirTravelCell: UICollectionViewCell {
+final class TicketCell: UICollectionViewCell {
     
-    weak var delegate: ListOfAirTravelDelegate?
+    weak var delegate: ListOfTicketsDelegate?
     
     var routing: (() -> Void)?
     private var ticketModel: Ticket?

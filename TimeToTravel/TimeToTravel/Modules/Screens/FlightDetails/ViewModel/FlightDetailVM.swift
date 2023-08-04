@@ -21,8 +21,9 @@ final class FlightDetailVMImpl: FlightDetailVM {
         case isLiked
     }
     
-    weak var delegate: ListOfAirTravelDelegate?
-    weak var ticketStateDelegate: TicketStateDelegate?
+//    weak var delegate: ListOfAirTravelDelegate?
+//    weak var ticketStateDelegate: TicketStateDelegate?
+    weak var delegate: TicketStateDelegate?
     
     var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
@@ -36,7 +37,7 @@ final class FlightDetailVMImpl: FlightDetailVM {
     
     init(data: Ticket, ticketStateDelegate: TicketStateDelegate?) {
         self.ticketData = data
-        self.ticketStateDelegate = ticketStateDelegate
+        self.delegate = ticketStateDelegate
     }
     
     func getData() {
@@ -63,6 +64,6 @@ final class FlightDetailVMImpl: FlightDetailVM {
     }
     
     func likeTappedInCell() {
-        ticketStateDelegate?.likeTappedInCell(in: ticketData)
+        delegate?.likeTappedInCell(in: ticketData)
     }
 }
