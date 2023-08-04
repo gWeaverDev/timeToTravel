@@ -11,20 +11,15 @@ protocol TicketStateDelegate: AnyObject {
     func likeTappedInCell(in ticket: Ticket)
 }
 
-protocol ListOfAirTravelVM: AnyObject {
-    var stateChange: ((ListOfAirTravelVMImpl.State) -> Void)? { get set }
+protocol ListOfTicketsVM: AnyObject {
+    var stateChange: ((ListOfTicketsVMImpl.State) -> Void)? { get set }
     func numberOfRows() -> Int
     func getData()
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
     func likeTappedInCell(ticket: Ticket)
 }
 
-protocol ListOfAirNavigation: AnyObject {
-    func goToListOfAir()
-    func goToFlightDetail(with data: Ticket, delegate: TicketStateDelegate)
-}
-
-final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
+final class ListOfTicketsVMImpl: ListOfTicketsVM {
     
     enum State {
         case loading
@@ -33,22 +28,20 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
         case reloadCollection(IndexPath)
     }
     
-    weak var navigation: ListOfAirNavigation?
-    
     var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
     
     private let service: AirPlaneServiceProtocol
+    private let coordinator: ListOfTicketsCoordinateProtocol
     private var state: State = .loading {
         didSet {
             self.stateChange?(state)
         }
     }
     
-    init(navigation: ListOfAirNavigation) {
-        let api = NetworkManager()
-        self.service = AirPlaneService(apiManager: api)
-        self.navigation = navigation
+    init(service: AirPlaneServiceProtocol, coordinator: ListOfTicketsCoordinateProtocol) {
+        self.service = service
+        self.coordinator = coordinator
     }
     
     func getData() {
@@ -58,7 +51,7 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
             switch result {
             case .success(let tickets):
                 let models = tickets.map {
-                    let cellVM = AirTravelCellVM(model: $0)
+                    let cellVM = TicketCellVM(model: $0)
                     cellVM.cellTapped = {
                         self.showFlightDetail(with: cellVM.model)
                     }
@@ -85,27 +78,23 @@ final class ListOfAirTravelVMImpl: ListOfAirTravelVM {
     }
     
     func likeTappedInCell(ticket: Ticket) {
-        guard let index = cellModels.firstIndex(where: { ($0 as? AirTravelCellVM)?.model == ticket }),
-              let cellVM = cellModels[index] as? AirTravelCellVM else { return }
+        guard let index = cellModels.firstIndex(where: { ($0 as? TicketCellVM)?.model == ticket }),
+              let cellVM = cellModels[index] as? TicketCellVM else { return }
         
         cellVM.model.isLiked.toggle()
         state = .reloadCollection(IndexPath(item: index, section: 0))
     }
     
-    private func showListOfAirDetail() {
-        navigation?.goToListOfAir()
-    }
-    
     private func showFlightDetail(with data: Ticket) {
-        navigation?.goToFlightDetail(with: data, delegate: self)
+        coordinator.goToFlightDetail(data: data, delegate: self)
     }
     
 }
 
-extension ListOfAirTravelVMImpl: TicketStateDelegate {
+extension ListOfTicketsVMImpl: TicketStateDelegate {
     func likeTappedInCell(in ticket: Ticket) {
-        guard let index = cellModels.firstIndex(where: { ($0 as? AirTravelCellVM)?.model == ticket }),
-              let cellVM = cellModels[index] as? AirTravelCellVM else { return }
+        guard let index = cellModels.firstIndex(where: { ($0 as? TicketCellVM)?.model == ticket }),
+              let cellVM = cellModels[index] as? TicketCellVM else { return }
         
         cellVM.model.isLiked.toggle()
         state = .reloadCollection(IndexPath(item: index, section: 0))

@@ -9,41 +9,18 @@ import Foundation
 import UIKit
 
 protocol Coordinatable {
-    var parentCoordinator: Coordinatable? { get set }
     var childCoordinators: [Coordinatable] { get set }
-    var navigationController: UINavigationController { get set }
-    func start()
+    func start() -> UIViewController
 }
 
 final class AppCoordinator: Coordinatable {
     
-    var parentCoordinator: Coordinatable?
-    
     var childCoordinators: [Coordinatable] = []
     
-    var navigationController: UINavigationController
-    
-    init(navigController: UINavigationController) {
-        self.navigationController = navigController
+    func start() -> UIViewController {
+        let listOfTicketsCoordinator = ListOfTicketsCoordinator(navigation: UINavigationController())
+        childCoordinators.append(listOfTicketsCoordinator)
+        return listOfTicketsCoordinator.start()
     }
     
-    func start() {
-        goToListOfAir()
-    }
-    
-}
-
-extension AppCoordinator: ListOfAirNavigation {
-    
-    func goToListOfAir() {
-        let viewModel = ListOfAirTravelVMImpl(navigation: self)
-        let vc = ListOfAirTravelVC(viewModel: viewModel)
-        navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func goToFlightDetail(with data: Ticket, delegate: TicketStateDelegate) {
-        let viewModel = FlightDetailVMImpl(data: data, ticketStateDelegate: delegate)
-        let vc = FlightDetailsVC(viewModel: viewModel)
-        navigationController.pushViewController(vc, animated: true)
-    }
 }
