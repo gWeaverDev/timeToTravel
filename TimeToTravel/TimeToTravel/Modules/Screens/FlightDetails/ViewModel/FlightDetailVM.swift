@@ -18,18 +18,16 @@ protocol FlightDetailVM: AnyObject {
 final class FlightDetailVMImpl: FlightDetailVM {
     
     enum State {
-        case isLiked
+        case reloadCollection
     }
     
-//    weak var delegate: ListOfAirTravelDelegate?
-//    weak var ticketStateDelegate: TicketStateDelegate?
     weak var delegate: TicketStateDelegate?
     
     var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
     
     private var ticketData: Ticket
-    private var state: State = .isLiked {
+    private var state: State = .reloadCollection {
         didSet {
             self.stateChange?(state)
         }
@@ -41,17 +39,7 @@ final class FlightDetailVMImpl: FlightDetailVM {
     }
     
     func getData() {
-        let detailModel = FlightDetailsCellVM(
-            model: .init(
-                startDate: ticketData.startDate.getDayAndMonth() ?? "",
-                endDate: ticketData.endDate.getDayAndMonth() ?? "",
-                startCity: ticketData.startCity,
-                endCity: ticketData.endCity,
-                price: ticketData.price,
-                isLiked: ticketData.isLiked
-            )
-        )
-
+        let detailModel = FlightDetailsCellVM(model: ticketData)
         cellModels.append(detailModel)
     }
     
@@ -65,5 +53,6 @@ final class FlightDetailVMImpl: FlightDetailVM {
     
     func likeTappedInCell() {
         delegate?.likeTappedInCell(in: ticketData)
+        state = .reloadCollection
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AirPlaneTarget.swift
+//  ListOfTicketsTarget.swift
 //  TimeToTravel
 //
 //  Created by George Weaver on 01.08.2023.
@@ -8,11 +8,11 @@
 import Foundation
 import Moya
 
-enum AirPlaneTarget {
+enum ListOfTicketsTarget {
     case getCheap
 }
 
-extension AirPlaneTarget: TargetType {
+extension ListOfTicketsTarget: TargetType {
     
     var baseURL: URL {
         return URL(string: "https://vmeste.wildberries.ru")!

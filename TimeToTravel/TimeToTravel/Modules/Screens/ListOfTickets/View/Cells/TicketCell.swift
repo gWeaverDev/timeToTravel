@@ -11,8 +11,6 @@ import SnapKit
 final class TicketCell: UICollectionViewCell {
     
     weak var delegate: ListOfTicketsDelegate?
-    
-    var routing: (() -> Void)?
     private var ticketModel: Ticket?
     
     private let likeButton: UIButton = {
@@ -98,19 +96,12 @@ final class TicketCell: UICollectionViewCell {
     
     private func addTargets() {
         likeButton.addTarget(self, action: #selector(likeTapped), for: .touchUpInside)
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
-        addGestureRecognizer(tapGR)
     }
     
     @objc
     private func likeTapped(_ sender: UIButton) {
         guard let ticket = ticketModel else { return }
         delegate?.likeButtonTapped(for: ticket)
-    }
-    
-    @objc
-    private func cellTapped() {
-        routing?()
     }
     
     private func setupLayout() {

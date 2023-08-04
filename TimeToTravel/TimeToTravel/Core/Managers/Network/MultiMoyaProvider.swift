@@ -52,8 +52,6 @@ extension MultiMoyaProvider {
                     }
                 }
             }
-        } else {
-            //TODO: - hide activityIndicator and show error
         }
     }
 }

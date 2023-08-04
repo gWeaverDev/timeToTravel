@@ -87,8 +87,8 @@ final class ListOfTicketsVC: UIViewController {
     }
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { sectionIndex, enviroment in
-            return self.createSections()
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
+            return self?.createSections()
         }
     }
     
@@ -105,6 +105,7 @@ final class ListOfTicketsVC: UIViewController {
     }
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension ListOfTicketsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
@@ -119,8 +120,13 @@ extension ListOfTicketsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         cell.delegate = self
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.showFlightDetail(for: indexPath)
+    }
 }
 
+//MARK: - ListOfTicketsDelegate
 extension ListOfTicketsVC: ListOfTicketsDelegate {
     
     func likeButtonTapped(for ticket: Ticket) {

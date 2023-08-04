@@ -17,6 +17,7 @@ protocol ListOfTicketsVM: AnyObject {
     func getData()
     func cellData(for indexPath: IndexPath) -> AnyCollectionViewCellModelProtocol
     func likeTappedInCell(ticket: Ticket)
+    func showFlightDetail(for index: IndexPath)
 }
 
 final class ListOfTicketsVMImpl: ListOfTicketsVM {
@@ -50,13 +51,7 @@ final class ListOfTicketsVMImpl: ListOfTicketsVM {
             guard let self = self else { return }
             switch result {
             case .success(let tickets):
-                let models = tickets.map {
-                    let cellVM = TicketCellVM(model: $0)
-                    cellVM.cellTapped = {
-                        self.showFlightDetail(with: cellVM.model)
-                    }
-                    return cellVM
-                }
+                let models = tickets.map { TicketCellVM(model: $0) }
                 self.cellModels = models
                 DispatchQueue.main.async {
                     self.state = .loaded
@@ -85,8 +80,9 @@ final class ListOfTicketsVMImpl: ListOfTicketsVM {
         state = .reloadCollection(IndexPath(item: index, section: 0))
     }
     
-    private func showFlightDetail(with data: Ticket) {
-        coordinator.goToFlightDetail(data: data, delegate: self)
+    func showFlightDetail(for index: IndexPath) {
+        guard let data = cellModels[index.row] as? TicketCellVM else { return }
+        coordinator.goToFlightDetail(data: data.model, delegate: self)
     }
     
 }

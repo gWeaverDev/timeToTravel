@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol FlightDetailsDelegate: AnyObject {
-    func likeButtonTapped(for ticket: Ticket)
+    func likeButtonTapped()
 }
 
 final class FlightDetailsVC: UIViewController {
@@ -63,17 +63,15 @@ final class FlightDetailsVC: UIViewController {
     }
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { sectionIndex, enviroment in
-            return self.createSections()
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
+            return self?.createSections()
         }
     }
     
     private func binding() {
-        viewModel.stateChange = { [weak self] state in
-            guard let self = self else { return }
-            
+        viewModel.stateChange = { [unowned self] state in
             switch state {
-            case .isLiked:
+            case .reloadCollection:
                 self.collectionView.reloadData()
             }
         }
@@ -113,7 +111,7 @@ extension FlightDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource 
 
 extension FlightDetailsVC: FlightDetailsDelegate {
     
-    func likeButtonTapped(for ticket: Ticket) {
+    func likeButtonTapped() {
         viewModel.likeTappedInCell()
     }
 }

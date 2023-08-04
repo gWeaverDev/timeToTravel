@@ -9,7 +9,7 @@ import Foundation
 
 final class FlightDetailsCellVM: CollectionViewCellModelProtocol {
     
-    private let model: Ticket
+    var model: Ticket
     
     init(model: Ticket) {
         self.model = model

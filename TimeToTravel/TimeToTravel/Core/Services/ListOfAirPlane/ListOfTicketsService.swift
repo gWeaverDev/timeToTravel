@@ -1,5 +1,5 @@
 //
-//  AirPlaneService.swift
+//  ListOfTicketsService.swift
 //  TimeToTravel
 //
 //  Created by George Weaver on 01.08.2023.
@@ -12,7 +12,7 @@ protocol AirPlaneServiceProtocol: AnyObject {
     func getCheap(completion: @escaping (Result<[Ticket], NetworkSeviceErrors>) -> Void)
 }
 
-final class AirPlaneService: AirPlaneServiceProtocol {
+final class ListOfTicketsService: AirPlaneServiceProtocol {
     
     private let apiManager: NetworkManager
     
@@ -26,7 +26,7 @@ final class AirPlaneService: AirPlaneServiceProtocol {
     }
     
     func getCheap(completion: @escaping (Result<[Ticket], NetworkSeviceErrors>) -> Void) {
-        apiManager.request(AirPlaneTarget.getCheap) { result in
+        apiManager.request(ListOfTicketsTarget.getCheap) { result in
             switch result {
             case .success(let response):
                 switch response.statusCode {

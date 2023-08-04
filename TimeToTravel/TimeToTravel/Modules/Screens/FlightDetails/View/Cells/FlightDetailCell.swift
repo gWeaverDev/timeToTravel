@@ -119,9 +119,7 @@ final class FlightDetailCell: UICollectionViewCell {
     
     @objc
     private func likeTapped(_ sender: UIButton) {
-        guard let ticket = ticketModel else { return }
-        likeButton.isSelected.toggle()
-        delegate?.likeButtonTapped(for: ticket)
+        delegate?.likeButtonTapped()
     }
     
     private func setupLayout() {

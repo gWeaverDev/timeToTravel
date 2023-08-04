@@ -11,24 +11,32 @@ protocol ListOfTicketsCoordinateProtocol: AnyObject {
     func goToFlightDetail(data: Ticket, delegate: TicketStateDelegate?)
 }
 
-final class ListOfTicketsCoordinator: Coordinatable, ListOfTicketsCoordinateProtocol {
+final class ListOfTicketsCoordinator {
     
-    var childCoordinators: [Coordinatable] = []
-    
+    //MARK: - Private properties
     private var navigation: UINavigationController
     
+    //MARK: - Lifecycle
     init(navigation: UINavigationController) {
         self.navigation = navigation
     }
+}
+
+//MARK: - Coordinatable
+extension ListOfTicketsCoordinator: Coordinatable {
     
     func start() -> UIViewController {
         let api = NetworkManager()
-        let service = AirPlaneService(apiManager: api)
+        let service = ListOfTicketsService(apiManager: api)
         let viewModel = ListOfTicketsVMImpl(service: service, coordinator: self)
         let vc = ListOfTicketsVC(viewModel: viewModel)
         navigation = UINavigationController(rootViewController: vc)
         return navigation
     }
+}
+
+//MARK: - ListOfTicketsCoordinateProtocol
+extension ListOfTicketsCoordinator: ListOfTicketsCoordinateProtocol {
     
     func goToFlightDetail(data: Ticket, delegate: TicketStateDelegate?) {
         let viewModel = FlightDetailVMImpl(data: data, ticketStateDelegate: delegate)

@@ -9,8 +9,6 @@ import Foundation
 
 final class TicketCellVM: CollectionViewCellModelProtocol {
     
-    var cellTapped: (() -> Void)?
-    
     var model: Ticket
     
     init(model: Ticket) {
@@ -19,6 +17,5 @@ final class TicketCellVM: CollectionViewCellModelProtocol {
     
     func configure(_ cell: TicketCell) {
         cell.fill(with: model)
-        cell.routing = cellTapped
     }
 }
