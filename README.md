@@ -10,7 +10,7 @@
   </tr>
   <tr>
     <td align="center">
-      <a href="https://t.me/george_weaver">Нажмите для обратной связи</a>
+      <a href="https://t.me/george_weaver">Нажмите на иконку для обратной связи</a>
     </td>
   </tr>
 </table>
