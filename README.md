@@ -1,6 +1,7 @@
-# timeToTravel
-Нажмите для обратной связи ![Static Badge](https://img.shields.io/badge/Telegram-Info?style=flat&logo=telegram&link=https%3A%2F%2Ft.me%2Fgeorge_weaver)
-
+# timeToTravel 
+<p align="center">
+Нажмите для обратной связи <a href="https://t.me/george_weaver"><img src="https://github.com/gWeaverDev/timeToTravel/files/12269068/telegram.pdf" style="width:50px;height:50px;"></a>
+</p>
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
