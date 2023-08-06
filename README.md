@@ -3,8 +3,8 @@
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
 <p align="center">
-  <img width="380" height="560" alt="demo1" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/cd544e90-df75-4d3b-8930-19857d6e6d3a">
-  <img width="380" height="560" alt="demo2" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/ccec2489-d2cf-40bb-a207-c899d6cfcd0d">
+  <img width="380" height="560" alt="demo1" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/88434316-bd03-486b-a4c6-ef3642d201b5">
+  <img width="380" height="560" alt="demo2" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/dfa0b0ec-aa65-4836-9e28-6fffa5e21094">
 </p>
 
 <h3>- Если пользователь лайкнул перелет и вернулся в список перелетов, то в списке у “лайкнутого” перелета должна “гореть” иконка “Лайк”.</h3>
@@ -13,8 +13,11 @@
 <h3>- Список авиаперелетов запрашивается один раз при старте приложения<h3>
 
 <p align="center">
-  <img width="380" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/83bb5b45-5936-45e5-bd62-5ba2f47e2e47">
+  <img width="380" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/aa2b0942-f824-4668-a1e6-31eeda33fc6b">
 </p>
+
+
+
 
 
 
