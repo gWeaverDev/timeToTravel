@@ -2,11 +2,10 @@
 
 <div align="center">
     <p>Нажмите на иконку для обратной связи</p>
-      <a href="https://t.me/george_weaver">
-    <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/bbd9316d-ec74-4f97-8dc1-61c0fffce113">
-  </a>
+    <a href="https://t.me/george_weaver">
+        <img src="https://raw.githubusercontent.com/gWeaverDev/timeToTravel/main/assets/124156429/bbd9316d-ec74-4f97-8dc1-61c0fffce113.jpg" alt="Feedback" width="32" height="32">
+    </a>
 </div>
-
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
