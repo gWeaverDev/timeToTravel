@@ -1,13 +1,11 @@
 # timeToTravel 
 
-<p align="center">
+<div align="center">
+  <p>Нажмите на иконку для обратной связи</p>
   <a href="https://t.me/george_weaver">
-    <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" alt="Feedback" width="32" height="32" style="display: block; margin: 0 auto;">
-    <br>
-    Нажмите иконку для обратной связи
+    <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" alt="Feedback" width="32" height="32">
   </a>
-</p>
-
+</div>
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
