@@ -1,21 +1,9 @@
 # timeToTravel 
 
 <div align="center">
-    <p>Нажмите на иконку для обратной связи</p>
-    <a href="https://t.me/george_weaver">
-        <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/02d09477-1ed3-4240-ab36-77b3a3dbc4ad" alt="Feedback" width="32" height="32">
-    </a>
+  <p>Для обратной связи:</p>
+  <p><a href="https://t.me/george_weaver">https://t.me/george_weaver</a></p>
 </div>
-
-Found one:
-[![FLipkart](https://github.com/gWeaverDev/timeToTravel/assets/124156429/02d09477-1ed3-4240-ab36-77b3a3dbc4ad)](https://t.me/george_weaver){:target="_blank"}
-Works for Jekyll only but in others, it leaves {:target="_blank"} part as it is.
-
-Was trying to be in the good books of Commonmark as well as kramdown...I think there is a way but can seem to figure out. I do have the markdown docs of github. Could you help me understand?
-
-Link:
-https://github.github.com/gfm/#links
-
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
