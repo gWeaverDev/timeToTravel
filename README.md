@@ -4,7 +4,7 @@
   <a href="https://t.me/george_weaver">
     <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" alt="Feedback" width="32" height="32" style="display: block; margin: 0 auto;">
     <br>
-    Нажмите для обратной связи
+    Нажмите иконку для обратной связи
   </a>
 </p>
 
