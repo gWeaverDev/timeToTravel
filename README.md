@@ -16,10 +16,7 @@
         border-radius: 50%;
     }
 </style>
-
-<img src="images/svg/reddit.svg" class="small-square" />
-<img src="images/svg/reddit.svg" class="medium-rounded" />
-<img src="images/svg/reddit.svg" class="large-circular" />
+<img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/4d5a2ff7-60d9-4d17-accc-aa299807262e" class="medium-rounded" />
 
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
