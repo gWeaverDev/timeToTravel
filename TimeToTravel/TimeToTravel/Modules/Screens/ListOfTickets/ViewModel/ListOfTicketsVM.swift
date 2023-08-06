@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TicketStateDelegate: AnyObject {
-    func likeTappedInCell(in ticket: Ticket)
+    func isLiked(in ticket: Ticket)
 }
 
 protocol ListOfTicketsVM: AnyObject {
@@ -32,7 +32,7 @@ final class ListOfTicketsVMImpl: ListOfTicketsVM {
     var stateChange: ((State) -> Void)?
     var cellModels: [AnyCollectionViewCellModelProtocol] = []
     
-    private let service: AirPlaneServiceProtocol
+    private let service: ListOfTicketsServiceProtocol
     private let coordinator: ListOfTicketsCoordinateProtocol
     private var state: State = .loading {
         didSet {
@@ -40,11 +40,12 @@ final class ListOfTicketsVMImpl: ListOfTicketsVM {
         }
     }
     
-    init(service: AirPlaneServiceProtocol, coordinator: ListOfTicketsCoordinateProtocol) {
+    init(service: ListOfTicketsServiceProtocol, coordinator: ListOfTicketsCoordinateProtocol) {
         self.service = service
         self.coordinator = coordinator
     }
     
+    //MARK: - Public methods
     func getData() {
         state = .loading
         service.getCheap { [weak self] result in
@@ -87,8 +88,9 @@ final class ListOfTicketsVMImpl: ListOfTicketsVM {
     
 }
 
+//MARK: - TicketStateDelegate
 extension ListOfTicketsVMImpl: TicketStateDelegate {
-    func likeTappedInCell(in ticket: Ticket) {
+    func isLiked(in ticket: Ticket) {
         guard let index = cellModels.firstIndex(where: { ($0 as? TicketCellVM)?.model == ticket }),
               let cellVM = cellModels[index] as? TicketCellVM else { return }
         

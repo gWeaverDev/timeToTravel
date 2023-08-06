@@ -10,9 +10,11 @@ import Moya
 
 final class NetworkManager {
     
+    //MARK: - Private properties
     private let manager: Session
     private let provider: MultiMoyaProvider
     
+    //MARK: - Lifecycle
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 100
@@ -24,7 +26,8 @@ final class NetworkManager {
         provider = MultiMoyaProvider(callbackQueue: DispatchQueue.main, session: manager, plugins: [loggerPlugin])
     }
 
+    //MARK: - Public methods
     func request(_ target: TargetType, completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        provider.multiRequest(MultiTarget(target), completion: completion)
+        provider.request(MultiTarget(target), completion: completion)
     }
 }

@@ -12,6 +12,7 @@ final class FlightDetailCell: UICollectionViewCell {
     
     weak var delegate: FlightDetailsDelegate?
     
+    //MARK: - Private propertis
     private var ticketModel: Ticket?
     
     private let flightLabel: UILabel = {
@@ -85,6 +86,7 @@ final class FlightDetailCell: UICollectionViewCell {
         return button
     }()
     
+    //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: .zero)
         cellAppearance()
@@ -96,6 +98,7 @@ final class FlightDetailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Public methods
     func fill(with model: Ticket) {
         self.ticketModel = model
         flightLabel.text = "\(model.startCity) - \(model.endCity)"
@@ -107,19 +110,14 @@ final class FlightDetailCell: UICollectionViewCell {
         likeButton.isSelected = model.isLiked
     }
     
+    //MARK: - Private methods
     private func cellAppearance() {
         backgroundColor = .white
         layer.cornerRadius = 10
-        layer.masksToBounds = true
     }
     
     private func addTargets() {
         likeButton.addTarget(self, action: #selector(likeTapped), for: .touchUpInside)
-    }
-    
-    @objc
-    private func likeTapped(_ sender: UIButton) {
-        delegate?.likeButtonTapped()
     }
     
     private func setupLayout() {
@@ -176,5 +174,11 @@ final class FlightDetailCell: UICollectionViewCell {
             $0.width.equalTo(80)
             $0.height.equalTo(28)
         }
+    }
+    
+    @objc
+    private func likeTapped(_ sender: UIButton) {
+        guard let ticket = ticketModel else { return }
+        delegate?.ticketIsLikedOnDetail(for: ticket)
     }
 }

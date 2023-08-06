@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 
 protocol FlightDetailsDelegate: AnyObject {
-    func likeButtonTapped()
+    func ticketIsLikedOnDetail(for ticket: Ticket)
 }
 
 final class FlightDetailsVC: UIViewController {
     
+    //MARK: - Private properties
     private let viewModel: FlightDetailVM
     
     private lazy var collectionView: UICollectionView = {
@@ -26,6 +27,7 @@ final class FlightDetailsVC: UIViewController {
         return collection
     }()
     
+    //MARK: - Lifecycle
     init(viewModel: FlightDetailVM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -48,6 +50,7 @@ final class FlightDetailsVC: UIViewController {
         collectionView.reloadData()
     }
     
+    //MARK: - Private methods
     private func setupAppearance() {
         view.backgroundColor = .purple
     }
@@ -59,12 +62,6 @@ final class FlightDetailsVC: UIViewController {
             $0.top.equalTo(view.safeAreaInsets.top)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaInsets.bottom)
-        }
-    }
-    
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
-            return self?.createSections()
         }
     }
     
@@ -89,8 +86,15 @@ final class FlightDetailsVC: UIViewController {
         return section
     }
     
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
+            return self?.createSections()
+        }
+    }
+    
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension FlightDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -109,9 +113,10 @@ extension FlightDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
 }
 
+//MARK: - FlightDetailsDelegate
 extension FlightDetailsVC: FlightDetailsDelegate {
     
-    func likeButtonTapped() {
-        viewModel.likeTappedInCell()
+    func ticketIsLikedOnDetail(for ticket: Ticket) {
+        viewModel.likeTappedInCell(for: ticket)
     }
 }

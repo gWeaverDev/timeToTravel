@@ -10,7 +10,10 @@ import SnapKit
 
 final class TicketCell: UICollectionViewCell {
     
+    //MARK: - Delegate
     weak var delegate: ListOfTicketsDelegate?
+    
+    //MARK: - Private properties
     private var ticketModel: Ticket?
     
     private let likeButton: UIButton = {
@@ -68,6 +71,7 @@ final class TicketCell: UICollectionViewCell {
         return view
     }()
     
+    //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: .zero)
         cellAppearance()
@@ -79,6 +83,7 @@ final class TicketCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Public methods
     func fill(with model: Ticket) {
         self.ticketModel = model
         self.startDate.text = model.startDate
@@ -89,6 +94,7 @@ final class TicketCell: UICollectionViewCell {
         self.likeButton.isSelected = model.isLiked
     }
     
+    //MARK: - Private methods
     private func cellAppearance() {
         backgroundColor = .white
         layer.cornerRadius = 10
@@ -96,12 +102,6 @@ final class TicketCell: UICollectionViewCell {
     
     private func addTargets() {
         likeButton.addTarget(self, action: #selector(likeTapped), for: .touchUpInside)
-    }
-    
-    @objc
-    private func likeTapped(_ sender: UIButton) {
-        guard let ticket = ticketModel else { return }
-        delegate?.likeButtonTapped(for: ticket)
     }
     
     private func setupLayout() {
@@ -152,6 +152,11 @@ final class TicketCell: UICollectionViewCell {
             $0.centerX.equalTo(priceLabel)
             $0.size.equalTo(32)
         }
-        
+    }
+    
+    @objc
+    private func likeTapped(_ sender: UIButton) {
+        guard let ticket = ticketModel else { return }
+        delegate?.ticketIsLikedOnList(for: ticket)
     }
 }

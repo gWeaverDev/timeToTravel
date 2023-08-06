@@ -8,11 +8,11 @@
 import Foundation
 import Moya
 
-protocol AirPlaneServiceProtocol: AnyObject {
+protocol ListOfTicketsServiceProtocol: AnyObject {
     func getCheap(completion: @escaping (Result<[Ticket], NetworkSeviceErrors>) -> Void)
 }
 
-final class ListOfTicketsService: AirPlaneServiceProtocol {
+final class ListOfTicketsService: ListOfTicketsServiceProtocol {
     
     private let apiManager: NetworkManager
     

@@ -11,8 +11,10 @@ final class AlertManager {
     
     static let shared = AlertManager()
     
+    //MARK: - Lifecycle
     init () {}
     
+    //MARK: - Public methods
     func presentAlert(for viewController: UIViewController, _ text: String) {
         
         let alertController = UIAlertController(title: "Ошибка", message: text, preferredStyle: .alert)

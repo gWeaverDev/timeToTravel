@@ -12,6 +12,7 @@ final class MultiMoyaProvider: MoyaProvider<MultiTarget> {
     
     typealias Target = MultiTarget
     
+    //MARK: - Lifecycle
     override init(
         endpointClosure: @escaping MoyaProvider<MultiTarget>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
         requestClosure: @escaping MoyaProvider<MultiTarget>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
@@ -30,28 +31,5 @@ final class MultiMoyaProvider: MoyaProvider<MultiTarget> {
             plugins: plugins,
             trackInflights: trackInflights
         )
-    }
-}
-
-extension MultiMoyaProvider {
-    
-    func multiRequest(_ target: Target, completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        if !ReachabilityManager.shared.isReachable {
-            self.request(target) { result in
-                switch result {
-                case .failure:
-                    completion(result)
-                case .success(let response):
-                    switch response.statusCode {
-                    case 401:
-                        if target.path.contains("sessions") {
-                            completion(result)
-                        }
-                    default:
-                        completion(result)
-                    }
-                }
-            }
-        }
     }
 }

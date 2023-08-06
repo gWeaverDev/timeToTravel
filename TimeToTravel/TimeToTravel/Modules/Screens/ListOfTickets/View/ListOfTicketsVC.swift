@@ -9,15 +9,17 @@ import UIKit
 import SnapKit
 
 protocol ListOfTicketsDelegate: AnyObject {
-    func likeButtonTapped(for ticket: Ticket)
+    func ticketIsLikedOnList(for ticket: Ticket)
 }
 
 final class ListOfTicketsVC: UIViewController {
     
+    //MARK: - Private properties
     private let viewModel: ListOfTicketsVM
     
-    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     private var navBarHeight: CGFloat = 0
+    
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
@@ -29,6 +31,7 @@ final class ListOfTicketsVC: UIViewController {
         return collection
     }()
     
+    //MARK: - Lifecycle
     init(viewModel: ListOfTicketsVM) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -46,6 +49,7 @@ final class ListOfTicketsVC: UIViewController {
         viewModel.getData()
     }
     
+    //MARK: - Private methods
     private func setupAppearance() {
         guard let navBar = navigationController?.navigationBar else { return }
         title = "Авиабилеты"
@@ -64,7 +68,7 @@ final class ListOfTicketsVC: UIViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top).offset(navBarHeight)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaInsets.bottom)
+            $0.bottom.equalTo(view.safeAreaInsets.bottom).inset(80)
         }
     }
     
@@ -86,12 +90,6 @@ final class ListOfTicketsVC: UIViewController {
         }
     }
     
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
-            return self?.createSections()
-        }
-    }
-    
     private func createSections() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(120))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -102,6 +100,12 @@ final class ListOfTicketsVC: UIViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         return section
+    }
+    
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, enviroment in
+            return self?.createSections()
+        }
     }
 }
 
@@ -129,7 +133,7 @@ extension ListOfTicketsVC: UICollectionViewDelegate, UICollectionViewDataSource 
 //MARK: - ListOfTicketsDelegate
 extension ListOfTicketsVC: ListOfTicketsDelegate {
     
-    func likeButtonTapped(for ticket: Ticket) {
+    func ticketIsLikedOnList(for ticket: Ticket) {
         viewModel.likeTappedInCell(ticket: ticket)
     }
 }
