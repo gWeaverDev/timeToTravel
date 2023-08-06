@@ -1,6 +1,6 @@
 # timeToTravel 
 <p align="center">
-Нажмите для обратной связи <a href="https://t.me/george_weaver"><img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/6a4b3c4e-a8ea-43bf-8b3a-af52896d405f" style="width:32px;height:32px;"></a>
+Нажмите для обратной связи <a href="https://t.me/george_weaver"><img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" style="width:32px;height:32px;"></a>
 </p>
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
