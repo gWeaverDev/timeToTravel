@@ -1,4 +1,6 @@
 # timeToTravel
+Нажмите для обратной связи ![Static Badge](https://img.shields.io/badge/Telegram-Info?style=flat&logo=telegram&link=https%3A%2F%2Ft.me%2Fgeorge_weaver)
+
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
