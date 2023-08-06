@@ -10,6 +10,9 @@
 <h3>- Пока происходит загрузка списка должен быть отображен индикатор загрузки.</h3>
 <h3>- Список авиаперелетов запрашивается один раз при старте приложения<h3>
 
+![demo](https://github.com/gWeaverDev/timeToTravel/assets/124156429/83bb5b45-5936-45e5-bd62-5ba2f47e2e47)
+
+
 
 https://github.com/gWeaverDev/timeToTravel/assets/124156429/52f4f71a-edd2-4a42-832a-0c55a72d9fc0
 
