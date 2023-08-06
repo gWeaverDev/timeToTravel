@@ -7,6 +7,8 @@
     </a>
 </div>
 
+[![Нажмите на иконку для обратной связи](https://github.com/gWeaverDev/timeToTravel/assets/124156429/02d09477-1ed3-4240-ab36-77b3a3dbc4ad)]([https://example.com](https://t.me/george_weaver))
+
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
