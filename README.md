@@ -13,7 +13,7 @@
 <h3>- Список авиаперелетов запрашивается один раз при старте приложения<h3>
 
 <p align="center">
-  <img width="200" height="400" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/aa2b0942-f824-4668-a1e6-31eeda33fc6b">
+  <img width="250" height="500" src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/aa2b0942-f824-4668-a1e6-31eeda33fc6b">
 </p>
 
 
