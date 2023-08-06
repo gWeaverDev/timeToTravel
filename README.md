@@ -3,9 +3,10 @@
 <div align="center">
     <p>Нажмите на иконку для обратной связи</p>
       <a href="https://t.me/george_weaver">
-    <img src="[путь_к_изображению" alt="telegram](https://github.com/gWeaverDev/timeToTravel/assets/124156429/bbd9316d-ec74-4f97-8dc1-61c0fffce113)">
+    <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/bbd9316d-ec74-4f97-8dc1-61c0fffce113)">
   </a>
 </div>
+
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
