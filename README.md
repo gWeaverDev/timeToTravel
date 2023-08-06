@@ -1,9 +1,9 @@
 # timeToTravel 
 
-<p align="center">
+<div align="center">
   <p>Нажмите на иконку для обратной связи</p>
     <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" width="32" height="32">
-  </p>
+  </div>
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
 
