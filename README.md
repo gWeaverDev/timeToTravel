@@ -1,19 +1,12 @@
 # timeToTravel 
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://t.me/george_weaver">
-        <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" width="32" height="32">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://t.me/george_weaver">Нажмите на иконку для обратной связи</a>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <a href="https://t.me/george_weaver">
+    <img src="https://github.com/gWeaverDev/timeToTravel/assets/124156429/1b7d9c6c-a974-410e-a50a-df22030291d3" alt="Feedback" width="32" height="32" style="display: block; margin: 0 auto;">
+    <br>
+    Нажмите для обратной связи
+  </a>
+</p>
 
 
 <h2 align="center">Тестовое задание «Пора в путешествие» с двумя экранами</h2>
